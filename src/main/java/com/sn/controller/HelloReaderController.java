@@ -14,4 +14,11 @@ public class HelloReaderController {
         mv.setViewName("helloReader");
         return mv;
     }
+    @RequestMapping(value = "/index")
+    public ModelAndView index(){
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("message", "Hello Reader!");
+        mv.setViewName("index2");
+        return mv;
+    }
 }
