@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class HelloReaderController {
+public class JspController {
 
     @RequestMapping(value = "/hello")
     public ModelAndView sayHello() {
@@ -18,7 +18,13 @@ public class HelloReaderController {
     public ModelAndView index(){
         ModelAndView mv = new ModelAndView();
         mv.addObject("message", "Hello Reader!");
-        mv.setViewName("index2");
+        mv.setViewName("index");
+        return mv;
+    }
+    @RequestMapping(value = "/main")
+    public ModelAndView MainPage(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("MainPage");
         return mv;
     }
 }

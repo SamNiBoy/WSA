@@ -45,4 +45,7 @@
         <welcome-file>index.htm</welcome-file>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+<listener>  
+    <listener-class>com.sn.work.task.TaskManager</listener-class>  
+</listener>
 </web-app>
