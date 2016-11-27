@@ -28,7 +28,7 @@ public class DBManager {
      */
     private static final String DBUSER = "sam";
     private static final String password = "sam";
-    private static final String AppDir1 = "D:/tomcat8/webapps/StockApp";
+    private static final String AppDir1 = "F:/MFC/WSA/target/classes";
     private static final String AppDir2 = "E:/mfc/stockapp";
 
     static ComboPooledDataSource  ds = null;
@@ -83,7 +83,7 @@ public class DBManager {
 
     static void initLog4j() {
         PropertyConfigurator.configure(AppDir1
-                + "/WEB-INF/conf/log4j.properties");
+                + "/log4j.properties");
     }
 
     static void initDataSource()
