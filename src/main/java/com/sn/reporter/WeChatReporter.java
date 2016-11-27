@@ -59,25 +59,25 @@ public class WeChatReporter extends BaseWCReporter{
 
     public String printHelp() {
     	if (is_admin_flg) {
-        resContent = "你可以发送以下代码:\n"
-                + "1.获取我关注的股票.\n" + "2.获取系统推荐股票.\n"
-                + "3.启用/停止买卖.\n" + "4.启用/停止推荐.\n"
-                + "5.报告数据情况.\n" + "6.关机.\n" 
-                + "xxxxxx 关注/取消关注股票.\n"
-                + "xxx@yyy.zzz添加邮箱接收买卖信息.\n";
-    	}
-    	else {
             resContent = "你可以发送以下代码:\n"
-                    + "1.获取我关注的股票.\n"
-                    + "2.获取系统推荐股票数据.\n"
-                    + "3.启用/停止股票买卖.\n"
-                    + "4.启用/停止推荐.\n"
+                    + "1.获取我关注的股票.\n" + "2.获取系统推荐股票.\n"
+                    + "3.启用/停止买卖.\n" + "4.启用/停止推荐.\n"
+                    + "5.报告数据情况.\n" + "6.关机.\n" 
                     + "xxxxxx 关注/取消关注股票.\n"
                     + "xxx@yyy.zzz添加邮箱接收买卖信息.\n";
-    	}
+        	}
+        	else {
+                resContent = "你可以发送以下代码:\n"
+                        + "1.获取我关注的股票.\n"
+                        + "2.获取系统推荐股票数据.\n"
+                        + "3.启用/停止股票买卖.\n"
+                        + "4.启用/停止推荐.\n"
+                        + "xxxxxx 关注/取消关注股票.\n"
+                        + "xxx@yyy.zzz添加邮箱接收买卖信息.\n";
+        	}
 
-        return resContent;
-    }
+            return resContent;
+        }
     public String getResponse() {
         if (content == null || content.equals("")) {
             return printHelp();
@@ -85,7 +85,7 @@ public class WeChatReporter extends BaseWCReporter{
         
         if (msgType.equals("event")) {
         	if (content.equals("subscribe")) {
-        		resContent = "欢迎关注微信:\n"
+        		resContent = "æ¬¢è¿å³æ³¨å¾®ä¿¡:\n"
         				+ printHelp();
         	}
         }

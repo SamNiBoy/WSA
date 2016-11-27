@@ -6,11 +6,11 @@
 out.print("hello, welcome, sam");
 BufferedReader br = new BufferedReader(new InputStreamReader((ServletInputStream)request.getInputStream()));
 String line = null;
-StringBuilder sb = new StringBuilder();
+String sb = new String();
 while((line = br.readLine())!=null){
-   sb.append(line);
+   sb+= line;
 }
-String xmlS = sb.toString();
+String xmlS = sb;
 System.out.println(xmlS);
 WeChatReporter wcr = new WeChatReporter();
 System.out.println("after wechat create");

@@ -25,7 +25,7 @@ public class ListSuggestStock implements IWork {
 
     long initDelay = 0;
     long delayBeforNxtStart = 5;
-    static String res = "开始收集推荐股票信息...";
+    static String res = "å¼å§æ¶éæ¨èè¡ç¥¨ä¿¡æ¯...";
     String frmUsr;
 
     TimeUnit tu = TimeUnit.MILLISECONDS;

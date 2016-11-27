@@ -25,7 +25,7 @@ public class ListGzStock implements IWork {
 
     long initDelay = 0;
     long delayBeforNxtStart = 5;
-    static String res = "开始收集关注股票信息...";
+    static String res = "å¼å§æ¶éå³æ³¨è¡ç¥¨ä¿¡æ¯...";
     String frmUsr;
 
     TimeUnit tu = TimeUnit.MILLISECONDS;

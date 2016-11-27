@@ -10,7 +10,7 @@ AppSecret:d67ad4ccd309506bdad0313098dfbe42
  --%>
 <%
 String APPID="wx23bd4a8c2f6afbef";
-String APPSECRET="d67ad4ccd309506bdad0313098dfbe42";
+String APPSECRET="97d76e58f5891ea5a078e1507db96b14";
 String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + APPID + "&secret=" + APPSECRET;
 URL ul = new URL(url);
 InputStream is = ul.openStream();
