@@ -26,7 +26,7 @@ public class Stock implements Comparable<Stock>{
 
     	static public final int BIG_SZ = 270;  // store 4.5 hours data.
     	static public final int SMALL_SZ = 270; // store 1 hour data.
-    	static public final int DLY_RCD_SZ = 60; // store 2 months data for daily record.
+    	static public final int DLY_RCD_SZ = 90; // store 3 months data for daily record.
     	static public final int SECONDS_PER_FETCH = 60;
         int MAX_SZ = 800;
         private boolean is_stock_divided = false;
@@ -1544,7 +1544,7 @@ public class Stock implements Comparable<Stock>{
                     }
                 }
             }
-            log.info("got max dly_td_cls_pri_lst pri for stock:" + id + ":" + maxPri + " for days:" + LastDays);
+            log.info("got max dly_td_cls_pri_lst pri for stock:" + id + ":" + maxPri + " for days:" + LastDays + " from sz:" + sz);
             if (maxPri > 0) {
                 return maxPri;
             }

@@ -17,7 +17,7 @@ import com.sn.trade.strategy.imp.TradeStrategyImp;
 public class ClosePriceTrendStockSelector implements IStockSelector {
 
     static Logger log = Logger.getLogger(ClosePriceTrendStockSelector.class);
-    int days = 60;
+    int days = 90;
 	double curPctLowLvl = 0.1;
     /**
      * @param args
@@ -26,12 +26,12 @@ public class ClosePriceTrendStockSelector implements IStockSelector {
     	Double maxYtClsPri = s.getMaxDlyTdClsPri(days);
     	Double minYtClsPri = s.getMinDlyTdClsPri(days);
     	Double curPri = s.getTdCls_pri(0);
-    	Double fiveDayAvgClsPri = s.getAvgTDClsPri(5, 0);
-    	Double fiveDayAvgClsPri1 = s.getAvgTDClsPri(5, 1);
-    	Double tenDayAvgClsPri = s.getAvgTDClsPri(10, 0);
-    	Double tenDayAvgClsPri1 = s.getAvgTDClsPri(10, 1);
+//    	Double fiveDayAvgClsPri = s.getAvgTDClsPri(10, 0);
+//    	Double fiveDayAvgClsPri1 = s.getAvgTDClsPri(10, 1);
+//    	Double tenDayAvgClsPri = s.getAvgTDClsPri(20, 0);
+//    	Double tenDayAvgClsPri1 = s.getAvgTDClsPri(20, 1);
     	
-    	if (maxYtClsPri == null || minYtClsPri == null || curPri == null || tenDayAvgClsPri1 == null) {
+    	if (maxYtClsPri == null || minYtClsPri == null || curPri == null) {
     		log.info("ClosePriceTrendStockSelector return false because null max/min price.");
     		return false;
     	}
@@ -40,14 +40,14 @@ public class ClosePriceTrendStockSelector implements IStockSelector {
     	double curPct = (curPri - minYtClsPri) / minYtClsPri;
     	
     	log.info("param days:" + days + " maxPct:" + maxPct + " curPct:" + curPct + " curPctLowLvl:" + curPctLowLvl);
-    	log.info("fiveDayAvgClsPri:" + fiveDayAvgClsPri + " tenDayAvgClsPri:" + tenDayAvgClsPri);
-    	log.info("fiveDayAvgClsPri1:" + fiveDayAvgClsPri1 + " tenDayAvgClsPri1:" + tenDayAvgClsPri1);
-    	
-    	boolean fiveup =(fiveDayAvgClsPri > fiveDayAvgClsPri1);
-    	boolean crossover = (fiveDayAvgClsPri - tenDayAvgClsPri) * (fiveDayAvgClsPri1 - tenDayAvgClsPri1) < 0;
+//    	log.info("fiveDayAvgClsPri:" + fiveDayAvgClsPri + " tenDayAvgClsPri:" + tenDayAvgClsPri);
+//    	log.info("fiveDayAvgClsPri1:" + fiveDayAvgClsPri1 + " tenDayAvgClsPri1:" + tenDayAvgClsPri1);
+//    	
+//    	boolean fiveup =(fiveDayAvgClsPri > fiveDayAvgClsPri1);
+//    	boolean crossover = (fiveDayAvgClsPri - tenDayAvgClsPri) * (fiveDayAvgClsPri1 - tenDayAvgClsPri1) < 0;
 
-        if (curPct <= maxPct * curPctLowLvl && fiveup && crossover) {
-            log.info("Now, today close price is in low, and 5 days golden cross 10 days.");
+        if ((curPct <= maxPct * curPctLowLvl || (maxPct < 0.2 && days > 60))) {
+            log.info("Now, stock:" + s.getID() + " today close price is in low, or inreased less than 0.2 for days:" + days);
             return true;
         }
         log.info("returned false for isGoodStock()");
@@ -68,7 +68,7 @@ public class ClosePriceTrendStockSelector implements IStockSelector {
 		// TODO Auto-generated method stub
 		log.info("curPctLowLvl:" + curPctLowLvl);
 		if (harder) {
-			days++;
+			days+=5;
 			if (days >= 90) {
 				days = 90;
 			}
@@ -79,9 +79,9 @@ public class ClosePriceTrendStockSelector implements IStockSelector {
 		}
 		else {
 			curPctLowLvl = curPctLowLvl + 0.01;
-			days--;
-			if (days < 20) {
-				days = 20;
+			days-=5;
+			if (days < 30) {
+				days = 30;
 			}
 			curPctLowLvl = curPctLowLvl + 0.01;
 			if (curPctLowLvl >= 0.2) {
