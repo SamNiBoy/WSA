@@ -28,10 +28,8 @@ public class ClosePriceTrendStockSelector implements IStockSelector {
     	Double curPri = s.getTdCls_pri(0);
     	Double fiveDayAvgClsPri = s.getAvgTDClsPri(5, 0);
     	Double fiveDayAvgClsPri1 = s.getAvgTDClsPri(5, 1);
-    	Double fiveDayAvgClsPri2 = s.getAvgTDClsPri(5, 2);
     	Double tenDayAvgClsPri = s.getAvgTDClsPri(10, 0);
     	Double tenDayAvgClsPri1 = s.getAvgTDClsPri(10, 1);
-    	Double tenDayAvgClsPri2 = s.getAvgTDClsPri(10, 2);
     	
     	if (maxYtClsPri == null || minYtClsPri == null || curPri == null || tenDayAvgClsPri1 == null) {
     		log.info("ClosePriceTrendStockSelector return false because null max/min price.");
@@ -41,13 +39,12 @@ public class ClosePriceTrendStockSelector implements IStockSelector {
     	double maxPct = (maxYtClsPri - minYtClsPri) / minYtClsPri;
     	double curPct = (curPri - minYtClsPri) / minYtClsPri;
     	
-    	log.info("maxPct:" + maxPct + " curPct:" + curPct + " curPctLowLvl:" + curPctLowLvl);
+    	log.info("param days:" + days + " maxPct:" + maxPct + " curPct:" + curPct + " curPctLowLvl:" + curPctLowLvl);
     	log.info("fiveDayAvgClsPri:" + fiveDayAvgClsPri + " tenDayAvgClsPri:" + tenDayAvgClsPri);
     	log.info("fiveDayAvgClsPri1:" + fiveDayAvgClsPri1 + " tenDayAvgClsPri1:" + tenDayAvgClsPri1);
-    	log.info("fiveDayAvgClsPri2:" + fiveDayAvgClsPri2 + " tenDayAvgClsPri2:" + tenDayAvgClsPri2);
     	
-    	boolean fiveup =(fiveDayAvgClsPri > fiveDayAvgClsPri1 && fiveDayAvgClsPri1 > fiveDayAvgClsPri2);
-    	boolean crossover = (fiveDayAvgClsPri - tenDayAvgClsPri) * (fiveDayAvgClsPri1 - tenDayAvgClsPri1) * (fiveDayAvgClsPri2 - tenDayAvgClsPri2) < 0;
+    	boolean fiveup =(fiveDayAvgClsPri > fiveDayAvgClsPri1);
+    	boolean crossover = (fiveDayAvgClsPri - tenDayAvgClsPri) * (fiveDayAvgClsPri1 - tenDayAvgClsPri1) < 0;
 
         if (curPct <= maxPct * curPctLowLvl && fiveup && crossover) {
             log.info("Now, today close price is in low, and 5 days golden cross 10 days.");
