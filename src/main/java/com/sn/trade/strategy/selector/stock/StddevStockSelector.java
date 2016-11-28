@@ -51,53 +51,53 @@ public class StddevStockSelector implements IStockSelector {
     		}
     		rs.close();
     		stm.close();
-    		if (isgood) {
-    			isgood = false;
-    			daysCnt = StockMarket.getNumDaysAhead(s.getID(), STConstants.DEV_CALCULATE_DAYS * 2);
-    	       	sql = "select avg(dev) dev from ("
- 		       		   + "select stddev((cur_pri - yt_cls_pri) / yt_cls_pri) dev, to_char(dl_dt, 'yyyy-mm-dd') atDay "
- 		       		   + "  from stkdat2 "
- 		       		   + " where id ='" + s.getID() + "'"
- 		       		   + "   and to_char(dl_dt, 'yyyy-mm-dd') >= to_char(sysdate - " + daysCnt + ", 'yyyy-mm-dd')"
- 		       		   + "   and not exists (select 'x' from usrStk where id ='" + s.getID() + "' and sell_mode_flg = 1)"
- 		       		   + " group by to_char(dl_dt, 'yyyy-mm-dd'))";
- 		        log.info(sql);
- 		        stm = con.createStatement();
- 		        rs = stm.executeQuery(sql);
- 		        if (rs.next()) {
- 		            dev2 = rs.getDouble("dev");
- 		            log.info("dev2:" + dev2 + "< dev1:" + dev1 + "? " + (dev2 < dev1));
- 		          	if (dev2 < dev1) {
- 		          		isgood = true;
- 		       	    }
- 		        }
- 		        rs.close();
- 		        stm.close();
-    		}
-    		
-    		if (isgood) {
-    			isgood = false;
-    			daysCnt = StockMarket.getNumDaysAhead(s.getID(), STConstants.DEV_CALCULATE_DAYS * 3);
-    	       	sql = "select avg(dev) dev from ("
- 		       		   + "select stddev((cur_pri - yt_cls_pri) / yt_cls_pri) dev, to_char(dl_dt, 'yyyy-mm-dd') atDay "
- 		       		   + "  from stkdat2 "
- 		       		   + " where id ='" + s.getID() + "'"
- 		       		   + "   and to_char(dl_dt, 'yyyy-mm-dd') >= to_char(sysdate - " + daysCnt + ", 'yyyy-mm-dd')"
- 		       		   + "   and not exists (select 'x' from usrStk where id ='" + s.getID() + "' and sell_mode_flg = 1)"
- 		       		   + " group by to_char(dl_dt, 'yyyy-mm-dd'))";
- 		        log.info(sql);
- 		        stm = con.createStatement();
- 		        rs = stm.executeQuery(sql);
- 		        if (rs.next()) {
- 		            dev3 = rs.getDouble("dev");
- 		            log.info("dev3:" + dev3 + "< dev2:" + dev2 + "? " + (dev3 < dev2));
- 		          	if (dev3 < dev2) {
- 		          		isgood = true;
- 		       	    }
- 		        }
- 		        rs.close();
- 		        stm.close();
-    		}
+//    		if (isgood) {
+//    			isgood = false;
+//    			daysCnt = StockMarket.getNumDaysAhead(s.getID(), STConstants.DEV_CALCULATE_DAYS * 2);
+//    	       	sql = "select avg(dev) dev from ("
+// 		       		   + "select stddev((cur_pri - yt_cls_pri) / yt_cls_pri) dev, to_char(dl_dt, 'yyyy-mm-dd') atDay "
+// 		       		   + "  from stkdat2 "
+// 		       		   + " where id ='" + s.getID() + "'"
+// 		       		   + "   and to_char(dl_dt, 'yyyy-mm-dd') >= to_char(sysdate - " + daysCnt + ", 'yyyy-mm-dd')"
+// 		       		   + "   and not exists (select 'x' from usrStk where id ='" + s.getID() + "' and sell_mode_flg = 1)"
+// 		       		   + " group by to_char(dl_dt, 'yyyy-mm-dd'))";
+// 		        log.info(sql);
+// 		        stm = con.createStatement();
+// 		        rs = stm.executeQuery(sql);
+// 		        if (rs.next()) {
+// 		            dev2 = rs.getDouble("dev");
+// 		            log.info("dev2:" + dev2 + "< dev1:" + dev1 + "? " + (dev2 < dev1));
+// 		          	if (dev2 < dev1) {
+// 		          		isgood = true;
+// 		       	    }
+// 		        }
+// 		        rs.close();
+// 		        stm.close();
+//    		}
+//    		
+//    		if (isgood) {
+//    			isgood = false;
+//    			daysCnt = StockMarket.getNumDaysAhead(s.getID(), STConstants.DEV_CALCULATE_DAYS * 3);
+//    	       	sql = "select avg(dev) dev from ("
+// 		       		   + "select stddev((cur_pri - yt_cls_pri) / yt_cls_pri) dev, to_char(dl_dt, 'yyyy-mm-dd') atDay "
+// 		       		   + "  from stkdat2 "
+// 		       		   + " where id ='" + s.getID() + "'"
+// 		       		   + "   and to_char(dl_dt, 'yyyy-mm-dd') >= to_char(sysdate - " + daysCnt + ", 'yyyy-mm-dd')"
+// 		       		   + "   and not exists (select 'x' from usrStk where id ='" + s.getID() + "' and sell_mode_flg = 1)"
+// 		       		   + " group by to_char(dl_dt, 'yyyy-mm-dd'))";
+// 		        log.info(sql);
+// 		        stm = con.createStatement();
+// 		        rs = stm.executeQuery(sql);
+// 		        if (rs.next()) {
+// 		            dev3 = rs.getDouble("dev");
+// 		            log.info("dev3:" + dev3 + "< dev2:" + dev2 + "? " + (dev3 < dev2));
+// 		          	if (dev3 < dev2) {
+// 		          		isgood = true;
+// 		       	    }
+// 		        }
+// 		        rs.close();
+// 		        stm.close();
+//    		}
     		con.close();
     	}
     	catch(Exception e) {
