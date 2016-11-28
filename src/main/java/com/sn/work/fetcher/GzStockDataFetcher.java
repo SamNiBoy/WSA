@@ -146,7 +146,7 @@ public class GzStockDataFetcher implements IWork {
             String fs [] = getFetchLst().split("#"), cs;
             RawStockData srd = null;
             String stkSql = "http://hq.sinajs.cn/list=";
-            for (int i = 0; i < fs.length; i++)
+            for (int i = 0; i < fs.length && fs[i].length() > 0; i++)
             {
                 log.info("Fetching..." + stkSql + fs[i]);
                 URL url = new URL(stkSql + fs[i]);
