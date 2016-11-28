@@ -234,7 +234,6 @@ public class SellModeWatchDog implements IWork {
 			log.info(sql);
 			stm = con.createStatement();
 			stm.execute(sql);
-			con.commit();
 			stm.close();
 			con.close();
 		} catch (Exception e) {

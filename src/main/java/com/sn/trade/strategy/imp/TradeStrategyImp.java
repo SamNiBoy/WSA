@@ -744,7 +744,6 @@ public class TradeStrategyImp implements ITradeStrategy {
             sql = "update CashAcnt set used_mny = used_mny - " + relasedMny + " where acntId = '" + ac.getActId() + "'";
             log.info(sql);
             stm.execute(sql);
-            con.commit();
             con.close();
             return true;
         }
@@ -879,7 +878,6 @@ public class TradeStrategyImp implements ITradeStrategy {
             stm = con.createStatement();
             sql = "update CashAcnt set used_mny = " + usedMny + " where acntId = '" + ac.getActId() + "'";
             stm.execute(sql);
-            con.commit();
             con.close();
             return true;
         }
@@ -902,7 +900,6 @@ public class TradeStrategyImp implements ITradeStrategy {
 			log.info(sql);
 			stm.execute(sql);
 			stm.close();
-			con.commit();
 			con.close();
 			// Here once after we trade a stock, clear it's historic memory
 			// data.

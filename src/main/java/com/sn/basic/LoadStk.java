@@ -24,7 +24,6 @@ public class LoadStk {
         DBManager dbm;
         Connection con = DBManager.getConnection();
         Statement stm = null;
-        String sql;
 
         try {
             con.setAutoCommit(false);
@@ -41,7 +40,6 @@ public class LoadStk {
 //                s = br.readLine();
 //            }
             LoadRest(stm, con);
-            con.commit();
             br.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,7 +52,7 @@ public class LoadStk {
         }
         finally {
             try {
-                stm.close();
+                con.close();
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

@@ -108,7 +108,6 @@ public class SimTrader implements IWork{
 			stm.execute(sql);
 			stm.close();
 			
-			con.commit();
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();

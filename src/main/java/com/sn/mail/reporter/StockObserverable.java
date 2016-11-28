@@ -271,7 +271,6 @@ public class StockObserverable extends Observable {
 			log.info(sql);
 			stm.execute(sql);
 			stm.close();
-			con.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

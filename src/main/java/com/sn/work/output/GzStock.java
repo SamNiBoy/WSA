@@ -97,7 +97,6 @@ public class GzStock implements com.sn.work.itf.IWork {
         		    StockMarket.addGzStocks(stockID);
             	}
             }
-            con.commit();
             stm.close();
             con.close();
             res = msg;

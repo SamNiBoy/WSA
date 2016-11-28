@@ -264,7 +264,6 @@ public class CashAcnt implements ICashAccount {
 				stm2.execute(sql);
 				stm2.close();
 			}
-			con.commit();
 			rs.close();
 			stm.close();
 			con.close();
@@ -399,7 +398,6 @@ public class CashAcnt implements ICashAccount {
 			stm = con.createStatement();
 			sql = "insert into cashacnt values('testCashAct001',50000,0,0,8,0.5,1,sysdate)";
 			stm.execute(sql);
-			con.commit();
 			stm.close();
 			con.close();
 			loadAcnt(actId);

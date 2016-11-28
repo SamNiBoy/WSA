@@ -274,7 +274,6 @@ public class SuggestStock implements IWork {
 					log.info(sql);
 					stm2 = con.createStatement();
 					stm2.execute(sql);
-					con.commit();
 					stm2.close();
 				}
 			}
@@ -379,7 +378,6 @@ public class SuggestStock implements IWork {
 				sql = "update usrStk set suggested_by = '" + STConstants.SUGGESTED_BY_FOR_SYSTEM_READ_FOR_TRADE + "', gz_flg = 1, sell_mode_flg = 0, suggested_sellmode_by = '', add_dt = sysdate where id ='" + id + "'";
 				Statement stm2 = con.createStatement();
 				stm2.execute(sql);
-				con.commit();
 				stm2.close();
 				grantCnt++;
 				stockMoved.add(id);
@@ -423,7 +421,6 @@ public class SuggestStock implements IWork {
 			    stm.execute(sql);
 			    stm.close();
 			}
-			con.commit();
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -551,7 +548,6 @@ public class SuggestStock implements IWork {
 			log.info(sql);
 			stm = con.createStatement();
 			stm.execute(sql);
-			con.commit();
 			stm.close();
 			con.close();
 		} catch (Exception e) {
@@ -568,7 +564,6 @@ public class SuggestStock implements IWork {
 			log.info(sql);
 			stm = con.createStatement();
 			stm.execute(sql);
-			con.commit();
 			stm.close();
 			con.close();
 		} catch (Exception e) {
