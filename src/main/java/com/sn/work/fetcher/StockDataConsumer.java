@@ -56,6 +56,13 @@ public class StockDataConsumer implements IWork {
     {
         initDelay = id;
         delayBeforNxtStart = dbn;
+        try {
+			con.setAutoCommit(false);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.error(e.getMessage());
+		}
     }
 
     public ArrayBlockingQueue<RawStockData> getDq() {
@@ -81,8 +88,10 @@ public class StockDataConsumer implements IWork {
                     cnt++;
                     log.info("About to consume RawData from RawStockDataConsume, queue size:" + dataqueue.size());
                     s.saveData(srd, con);
+                    srd = null;
                 }
                 if ((cnt >= ss.size() && s != null) || dataqueue.isEmpty()) {
+                	con.commit();
                 	log.info("after fetch:" + cnt + " rows, and calIndex at:" + s.getDl_dt());
                     Timestamp ts = s.getDl_dt();
                     StockMarket.calIndex(ts);

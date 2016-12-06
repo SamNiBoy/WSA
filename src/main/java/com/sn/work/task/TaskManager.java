@@ -54,8 +54,8 @@ public class TaskManager implements ServletContextListener{
             StockDataFetcher.start();
             GzStockDataFetcher.start();
         	SuggestStock.start();
-        	//SellModeWatchDog.start();
-            SimTrader.start();
+        	SellModeWatchDog.start();
+            //SimTrader.start();
             return true;
         }
         else {

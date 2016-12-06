@@ -40,8 +40,8 @@ public class QtyBuyPointSelector implements IBuyPointSelector {
         	isStockFreshAdded = SuggestStock.isStockFreshAddedForTrade(stk);
         	
         	if (isStockFreshAdded) {
-        		tradeThresh = tradeThresh / 2;
-        		log.info("Stock is freshly added for trade, use half thresh value:" + tradeThresh);
+        		tradeThresh = 0;
+        		log.info("Stock is freshly added for trade, use 0 value:" + tradeThresh);
         	}
         	
         	double maxPct = (maxPri - minPri) / yt_cls_pri;

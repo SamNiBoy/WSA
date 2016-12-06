@@ -49,6 +49,10 @@ public class QtySellPointSelector implements ISellPointSelector {
 				tradeThresh = tradeThresh / 2;
 				log.info("sell mode stock use half thresh hold value:" + tradeThresh);
 			}
+			else {
+				log.info("not in sell mode, will not sell stock!");
+				return false;
+			}
 			
 			double maxPct = (maxPri - minPri) / yt_cls_pri;
 			double curPct = (cur_pri - minPri) / yt_cls_pri;
