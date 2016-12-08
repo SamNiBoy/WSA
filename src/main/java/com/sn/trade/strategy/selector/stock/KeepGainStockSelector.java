@@ -13,7 +13,7 @@ public class KeepGainStockSelector implements IStockSelector {
      * @param args
      */
     public boolean isTargetStock(Stock s, ICashAccount ac) {
-        if (s.getSd().keepDaysClsPriGain(days, dayPct)) {
+        if (s.getSd().keepDaysClsPriGain(days,0, dayPct)) {
              log.info("returned true because keep " + days + " days gain " + dayPct);
              return true;
         }

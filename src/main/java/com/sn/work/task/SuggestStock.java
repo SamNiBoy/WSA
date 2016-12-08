@@ -31,6 +31,7 @@ import com.sn.trade.strategy.selector.stock.PriceStockSelector;
 import com.sn.trade.strategy.selector.stock.QtyEnableTradeStockSelector;
 import com.sn.trade.strategy.selector.stock.StddevStockSelector;
 import com.sn.trade.strategy.selector.stock.TopGainStockSelector;
+import com.sn.trade.strategy.selector.stock.crossStarStockSelector;
 import com.sn.work.WorkManager;
 import com.sn.work.itf.IWork;
 
@@ -115,13 +116,13 @@ public class SuggestStock implements IWork {
 	public SuggestStock(long id, long dbn) {
 		initDelay = id;
 		delayBeforNxtStart = dbn;
-		selectors.add(new DefaultStockSelector());
+		//selectors.add(new DefaultStockSelector());
 		selectors.add(new PriceStockSelector());
-		selectors.add(new StddevStockSelector());
+		//selectors.add(new StddevStockSelector());
 		//selectors.add(new LimitClsPriStockSelector());
 		//selectors.add(new QtyEnableTradeStockSelector());
 		//selectors.add(new AvgPriStockSelector());
-		selectors.add(new ClosePriceTrendStockSelector());
+		selectors.add(new crossStarStockSelector());
 		//selectors.add(new MostPlusStockSelector());
 //		selectors.add(new KeepLostStockSelector());
 	}

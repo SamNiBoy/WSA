@@ -13,17 +13,18 @@ import com.sn.stock.Stock;
 import com.sn.stock.StockMarket;
 import com.sn.trade.strategy.imp.TradeStrategyImp;
 
-public class KeepLostStockSelector implements IStockSelector {
+public class crossStarStockSelector implements IStockSelector {
 
-    static Logger log = Logger.getLogger(KeepLostStockSelector.class);
-    int days = 3;
-    double dayPct = 0.01;
+    static Logger log = Logger.getLogger(crossStarStockSelector.class);
+    int lostdays = 7;
+    int gaindays = 2;
+    double dayPct = 0.005;
     /**
      * @param args
      */
     public boolean isTargetStock(Stock s, ICashAccount ac) {
-        if (s.getSd().keepDaysClsPriLost(days, 0, dayPct)) {
-                    log.info("returned true because keep "+ days + " days lost " + dayPct);
+        if (s.getSd().keepDaysClsPriLost(lostdays, gaindays, dayPct) && s.getSd().keepDaysClsPriGain(gaindays, 0, dayPct)) {
+                    log.info("returned true because keep "+ lostdays + " days lost, and keep " + gaindays + " gain, for pct:"+ dayPct);
                     return true;
         }
         log.info("returned false for isGoodStock()");
@@ -32,22 +33,22 @@ public class KeepLostStockSelector implements IStockSelector {
 	@Override
 	public boolean isORCriteria() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 	@Override
 	public boolean isMandatoryCriteria() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	@Override
 	public boolean adjustCriteria(boolean harder) {
 		// TODO Auto-generated method stub
 		if (harder) {
-			if (days >= 5) {
-				log.info("days can not more than 5");
+			if (lostdays >= 15) {
+				log.info("lostdays can not more than 15");
 			}
 			else {
-			    days++;
+				lostdays++;
 			}
 			if (dayPct >= 0.03) {
 				log.info("dayPct can not more than 0.03");
@@ -55,13 +56,17 @@ public class KeepLostStockSelector implements IStockSelector {
 			else {
 			    dayPct += dayPct/10;
 			}
+			gaindays++;
+			if (gaindays > 3) {
+				gaindays=3;
+			}
 		}
 		else {
-			if (days <= 3) {
-				log.info("days can not less than 3");
+			if (lostdays <= 3) {
+				log.info("lostdays can not less than 3");
 			}
 			else {
-				days--;
+				lostdays--;
 			}
 			if (dayPct <= 0.001) {
 				log.info("dayPct can not less than 0.001");
@@ -69,8 +74,12 @@ public class KeepLostStockSelector implements IStockSelector {
 			else {
 				dayPct -= dayPct/10;
 			}
+			gaindays--;
+			if (gaindays<1) {
+				gaindays = 1;
+			}
 		}
-		log.info("try " + (harder ? " harder" : " loose") + " days:" + days + " dayPct:" + dayPct);
+		log.info("try " + (harder ? " harder" : " loose") + " lostdays:" + lostdays + " dayPct:" + dayPct + " gaindays:" + gaindays);
 		return false;
 	}
     @Override

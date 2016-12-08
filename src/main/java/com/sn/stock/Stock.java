@@ -79,18 +79,18 @@ public class Stock implements Comparable<Stock>{
         double pct_jumpping_water = 0.8;
         
         
-        public boolean keepDaysClsPriLost(int days, double threshold) {
-            log.info("keepDaysClsPriLost: check if yt_cls_pri has " + days + " days keep lost with threshold value:" + threshold);
+        public boolean keepDaysClsPriLost(int days, int shftdays, double threshold) {
+            log.info("keepDaysClsPriLost: check if yt_cls_pri has " + days + " days, shftdays:" + shftdays+ " keep lost with threshold value:" + threshold);
             int size = yt_cls_pri_lst.size();
-            if(size < days + 1 || days <= 0) {
+            if(size < days + 1 + shftdays || days <= 0) {
                 return false;
             }
             
             double pre_yt_cls_pri = 0;
             double yt_cls_pri = 0;
             for(int i = 0; i < days; i++) {
-            	pre_yt_cls_pri = yt_cls_pri_lst.get(size - i - 2);
-                yt_cls_pri = yt_cls_pri_lst.get(size - i - 1);
+            	pre_yt_cls_pri = yt_cls_pri_lst.get(size - i - 2 -shftdays);
+                yt_cls_pri = yt_cls_pri_lst.get(size - i - 1 - shftdays);
                 if ((pre_yt_cls_pri - yt_cls_pri) / pre_yt_cls_pri >= threshold) {
                     log.info("pre_yt_cls_pri:" + pre_yt_cls_pri + " is higher than " + yt_cls_pri + " by" + threshold);
                     continue;
@@ -103,18 +103,18 @@ public class Stock implements Comparable<Stock>{
             return true;
         }
         
-        public boolean keepDaysClsPriGain(int days, double threshold) {
-            log.info("keepDaysClsPriGain: check if yt_cls_pri has " + days + " days keep gain with threshold value:" + threshold);
+        public boolean keepDaysClsPriGain(int days, int shftdays, double threshold) {
+            log.info("keepDaysClsPriGain: check if yt_cls_pri has " + days + " days, shftdays:" + shftdays + " keep gain with threshold value:" + threshold);
             int size = yt_cls_pri_lst.size();
-            if(size < days + 1 || days <= 0) {
+            if(size < days + 1 + shftdays || days <= 0) {
                 return false;
             }
             
             double pre_yt_cls_pri = 0;
             double yt_cls_pri = 0;
             for(int i = 0; i < days; i++) {
-            	pre_yt_cls_pri = yt_cls_pri_lst.get(size - i - 2);
-                yt_cls_pri = yt_cls_pri_lst.get(size - i - 1);
+            	pre_yt_cls_pri = yt_cls_pri_lst.get(size - i - 2 - shftdays);
+                yt_cls_pri = yt_cls_pri_lst.get(size - i - 1 - shftdays);
                 if (threshold <= (yt_cls_pri - pre_yt_cls_pri) / pre_yt_cls_pri) {
                     log.info("pre_yt_cls_pri:" + pre_yt_cls_pri + " is less than yt_cls_pri:" + yt_cls_pri + " by" + threshold);
                     continue;
